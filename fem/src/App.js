@@ -13,6 +13,8 @@ function App() {
     tools: []
   })
 
+  const [showFilter, setShowFilter] = useState(false)
+
 
 
   const jobFilter = () => {
@@ -60,7 +62,6 @@ function App() {
 
   const handleSingleFilter = (filter) => {
 
-    console.log(filter) 
 
     switch (filter.type) {
       case 'role':
@@ -94,6 +95,14 @@ function App() {
             
       default:
         break;
+    }
+  }
+
+  const isFilterEmpty = () => {
+    if (filterList.roles.length === 0 && filterList.levels.length === 0 && filterList.langs.length === 0 && filterList.tools.length === 0) {
+      return true
+    } else {
+      return false
     }
   }
 
@@ -139,6 +148,7 @@ function App() {
 
 
   useEffect(() => {
+    setShowFilter(!isFilterEmpty())
     setJobOffer(jobFilter())
   }, [filterList]);
 
@@ -148,7 +158,7 @@ function App() {
 
   return (
     <AppWrapper>
-      <SearchBar filterList={filterList}  clearAllSearchHandler={clearFilters} handleSearchFilter={handleSingleFilter}/>
+       <SearchBar filterList={filterList}  clearAllSearchHandler={clearFilters} handleSearchFilter={handleSingleFilter} show={showFilter}/>
       <JobPanel jobData={[...jobOffer]} handleFilter={handleSearch} />
     </AppWrapper>
   );

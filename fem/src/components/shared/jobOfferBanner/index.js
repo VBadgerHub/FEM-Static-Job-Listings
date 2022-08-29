@@ -6,7 +6,7 @@ import { PanelAvatar, PanelContainer, PanelInfoRow, PanelInfoRowContainer, Panel
 export default function index({...props}) {
   return (
     <PanelWrapper >
-      <PanelContainer>
+      <PanelContainer isFeatured={props.featured}>
         <PanelAvatar avatarImg={process.env.PUBLIC_URL + props.logo}/>
         <PanelInfoRowContainer>          
           <PanelInfoRow>

@@ -33,7 +33,7 @@ export default createGlobalStyle`
       position: absolute;
       content: "";
       width: 100vw;
-      height: 20vh;
+      height: 17vh;
       top: 0;
       background-color: hsl(180, 29%, 50%);
       z-index: -1;

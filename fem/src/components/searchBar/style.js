@@ -13,16 +13,17 @@ const tagShow = keyframes`
 `;
 
 export const SearchBarWrapper = styled.div`
-    margin-top: 120px;
+    margin-top: -20px;
     margin-bottom: 3rem;
     box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
-    width: 90vw;
+    width: 72vw;
     background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     color: hsl(180, 29%, 50%);
     border-radius: 15px;
+    opacity: ${props => props.showFilter ? 1 : 0};
 `
 
 

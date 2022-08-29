@@ -18,7 +18,7 @@ export const PanelContainer = styled.div`
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
   width: 100%;
   padding: 1rem;
-  border-left: 5px solid hsl(180, 29%, 50%);
+  border-left: 5px solid ${props => props.isFeatured? 'hsl(180, 29%, 50%)' : 'transparent'};
   border-radius: 5px;
   display: flex;
   flex-direction: row;

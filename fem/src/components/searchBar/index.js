@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ClearButton, SearchBar, SearchBarItem, SearchBarItemClose, SearchBarWrapper } from './style'
 
-const Index = ({filterList, handleSearchFilter, clearAllSearchHandler}) => {
+const Index = ({filterList, handleSearchFilter, clearAllSearchHandler, show}) => {
   
   const [search, setSearch] = useState(filterList)
 
@@ -9,9 +9,9 @@ const Index = ({filterList, handleSearchFilter, clearAllSearchHandler}) => {
     setSearch(filterList)
   }, [filterList]);
 
-  
+  console.log(show);
   return (
-    <SearchBarWrapper>
+    <SearchBarWrapper showFilter={show}>
         <SearchBar>
             {search?.roles.length > 0? search.roles.map((el, index) => (
               <SearchBarItem key={index}  >
