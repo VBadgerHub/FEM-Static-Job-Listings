@@ -1,75 +1,155 @@
 import JobPanel from './pages/JobPanel';
 import SearchBar from './components/searchBar';
 import { AppWrapper } from 'style';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import compData from 'db/data.json'
 
 function App() {
   const [jobOffer, setJobOffer] = useState([...compData])
-  const [searchList, setSearchList] = useState([])
-  const [filterList, setFilterList] = useState([])
+  const [filterList, setFilterList] = useState({
+    roles: [],
+    levels: [],
+    langs: [],
+    tools: []
+  })
 
-  const clearSearch = (toRemove) => {
-    let temp = searchList.filter(x => x !== toRemove) 
-    setSearchList([...temp])
-    handleFilter(toRemove.flag, toRemove.data, 're')
+
+
+  const jobFilter = () => {
+    const jobs = [...compData]
+    let Arr1 = []
+    let Arr2 = []
+    let Arr3 = []
+    let Arr4 = []
+
+
+    if (filterList.roles.length > 0) {
+      Arr1 = jobs.filter(x => x.role.includes(filterList.roles))
+    } else {
+      Arr1 = [...jobs]
+    }
+
+    if (filterList.levels.length > 0) {
+      Arr2 = Arr1.filter(x => x.level.includes(filterList.levels))
+    } else {
+      Arr2 = [...Arr1]
+    }
+
+    if (filterList.langs.length > 0) {
+      
+      Arr2.forEach(el => {
+        if (el.languages.length > 0 && filterList.langs.every(x => el.languages.includes(x))) {
+          Arr3.push(el)
+        }
+      });
+    } else {
+      Arr3 = [...Arr2]
+    }
+
+    if (filterList.tools.length > 0) {
+      Arr3.forEach(el => {
+        if (el.tools.length > 0 && filterList.tools.every(x => el.tools.includes(x))) {
+          Arr4.push(el)
+        }
+      });
+    } else {
+      Arr4 = [...Arr3]
+    }
+   return [Arr4]
   }
 
-  const handleSearch = (data) => {
+  const handleSingleFilter = (filter) => {
 
-    if (!searchList.includes(data.data)) {
-      setSearchList(prev => [...prev, data])
-      switch (data.flag) {
-        case 'role':
-          handleFilter('role', data.data)
-          break;
-          case 'level':
-          handleFilter('level', data.data)
-          break;
-          case 'lang':
-          handleFilter('lang', data.data)
-          break;
-          case 'tools':
-          handleFilter('tools', data.data)
-          break;
-                
-        default:
-          break;
-      }
-    }    
-  }
-
-
-  const handleFilter = (flag, data, filterType) => {
-    let  temp = [...jobOffer]
-
-    let finalList =[]
-    switch (flag) {
+    console.log('item clear') 
+    switch (filter.type) {
       case 'role':
-        finalList = temp.filter(el => el.role === data)
+        if (filterList.roles.includes(filter.value)) {
+          setFilterList({
+            ...filterList,
+            roles: filterList.roles.filter(x => x !== filter.value)
+          })}
         break;
       case 'level':
-        finalList = temp.filter(el => el.level === data)
+        if (filterList.levels.includes(filter.value)) {
+          setFilterList({
+            ...filterList,
+            levels: filterList.levels.filter(x => x !== filter.value)
+          })}
         break;
       case 'lang':
-        finalList = temp.filter(el => el.languages.includes(data))
+        if (filterList.langs.includes(filter.value)) {
+          setFilterList({
+            ...filterList,
+            langs: filterList.langs.filter(x => x !== filter.value)
+          })}
         break;
-      case 'tools':
-        finalList = temp.filter(el => el.tools.includes(data))
+      case 'tool':
+        if (filterList.tools.includes(filter.value)) {
+          setFilterList({
+            ...filterList,
+            tools: filterList.tools.filter(x => x !== filter.value)
+          })}
         break;
+            
       default:
         break;
     }
-    setJobOffer([...finalList])
   }
 
-  
 
+
+  const handleSearch = (data) => {    
+
+
+    switch (data.flag) {
+      case 'role':
+        if(!filterList.roles.includes(data.data)) {
+        setFilterList( prev => ({...prev, roles: [...prev.roles, data.data]}))
+        }
+        break;
+      case 'level':
+        if(!filterList.levels.includes(data.data)) {
+        setFilterList( prev => ({...prev, levels: [...prev.levels, data.data]}))
+        } 
+        break;
+      case 'lang':
+        if(!filterList.langs.includes(data.data)) {
+        setFilterList( prev => ({...prev, langs: [...prev.langs, data.data]}))
+        }
+        break;  
+      case 'tools':
+        if(!filterList.tools.includes(data.data)) {
+        setFilterList( prev => ({...prev, tools: [...prev.tools, data.data]}))
+        }
+        break;  
+      default:
+        break;
+      }
+  }
+
+  const clearFilters = () =>{
+    console.log('clear');
+    setFilterList({
+      roles: [],
+      levels: [],
+      langs: [],
+      tools: []
+    })
+  }
+
+
+  useEffect(() => {
+    setJobOffer(jobFilter())
+  }, [filterList]);
+
+  useEffect(() => {
+    setJobOffer(jobFilter())
+  }, []);
 
   return (
     <AppWrapper>
-      <SearchBar filterList={searchList} clearSearchHandler={clearSearch}/>
-      <JobPanel jobData={jobOffer} handleFilter={handleSearch}/>
+      <SearchBar filterList={filterList}  clearAllSearchHandler={clearFilters} handleSearchFilter={handleSingleFilter}/>
+      <JobPanel jobData={[...jobOffer]} handleFilter={handleSearch} />
     </AppWrapper>
   );
 }

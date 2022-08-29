@@ -29,6 +29,7 @@ export const PanelAvatar = styled.div`
   width: 80px;
   border-radius: 50%;
   background-image: url(${props => props.avatarImg});
+  background-position: center;
 `
 
 export const PanelInfoRowContainer = styled.div`

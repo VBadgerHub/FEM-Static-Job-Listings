@@ -8,8 +8,7 @@ export default function index({...props}) {
     <PanelWrapper >
       <PanelContainer>
         <PanelAvatar avatarImg={process.env.PUBLIC_URL + props.logo}/>
-        <PanelInfoRowContainer>
-          
+        <PanelInfoRowContainer>          
           <PanelInfoRow>
             {props.company}
             {props.new && <CompanyButton background="hsl(180, 29%, 50%)">New!</CompanyButton>}
@@ -29,12 +28,12 @@ export default function index({...props}) {
             <TagWrapper onClick={() => props.onClick({flag: 'level', data:props.level})}>
               {props.level}
             </TagWrapper>
-            {props.languages.map((language, index) => (
+            {props.languages?.map((language, index) => (
               <TagWrapper key={index} onClick={() => props.onClick({flag: 'lang', data: language})}>
                 {language}
               </TagWrapper>
             ))}
-             {props.tools.map((tools, index) => (
+             {props.tools?.map((tools, index) => (
               <TagWrapper key={index} onClick={() => props.onClick({flag: 'tools', data: tools})}>
                 {tools}
               </TagWrapper>
