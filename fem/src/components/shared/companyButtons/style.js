@@ -12,4 +12,10 @@ export const CompanyButton = styled.div`
     padding-bottom: 2px;
     padding-left: 8px;
     padding-right: 8px;
+
+    @media screen and (max-device-width:780px) {
+    padding: .8rem 1.5rem .5rem 1.5rem;
+    text-transform: uppercase;
+    font-size: 2.5rem;
+  }
 `;

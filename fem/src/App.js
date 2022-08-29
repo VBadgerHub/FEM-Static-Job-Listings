@@ -129,7 +129,6 @@ function App() {
   }
 
   const clearFilters = () =>{
-    console.log('clear');
     setFilterList({
       roles: [],
       levels: [],

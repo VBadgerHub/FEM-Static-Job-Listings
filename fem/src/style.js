@@ -8,3 +8,4 @@ export const AppWrapper = styled.div`
     justify-content: center;
     padding-top: 120px;
 `
+

@@ -13,23 +13,38 @@ const tagShow = keyframes`
 `;
 
 export const SearchBarWrapper = styled.div`
+    margin-top: 120px;
     margin-bottom: 3rem;
     box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.1);
-    width: 101%;
-    height: 60px;
+    width: 90vw;
     background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     color: hsl(180, 29%, 50%);
-    
+    border-radius: 15px;
 `
+
+
 export const SearchBar = styled.div`
-    width: 95%;
+    width: 100%;
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+
+    @media screen and (max-device-width:780px) {
+    height: 15vh;
+    
+  }
 `
 export const ClearButton = styled.div`
+    padding: 2rem;
+    font-size: 1.5rem;
+
+    @media screen and (max-device-width:780px) {
+        padding: 1rem;
+        font-size: 2.5rem;
+    }
+
     &:hover {
         cursor: pointer;
         text-decoration: underline;
@@ -44,36 +59,56 @@ export const SearchBarItem = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: fit-content;
+    width: min-content;
     height: 28px;
     border-radius: 5px;
-    padding: 1px 10px 0 5px;
-    margin-left: 2rem;
-    margin-right: 0.5rem;
+    padding: 1px 0px 0 5px;
+    margin: 1rem;
     transition: .3s;
     cursor: pointer;
     animation: ${tagShow} 0.5s ease-in-out;
 
-    &:hover::after {
+    
+
+@media screen and (max-device-width:780px) {
+    display: flex;
+    transform: scale(1.5);
+    margin-left: 6rem;
+    margin-right: 0.5rem;
+    margin-top: 3rem;
+}
+
+@media screen and (max-device-width:480px) {
+    display: flex;
+    transform: scale(2);
+    margin: 3rem;
+    margin-left: 5rem;
+    margin-right: 4.5rem;
+    
+}
+
+@media screen and (max-device-width:380px) {
+    display: flex;
+    transform: scale(2.2);
+    margin: 3rem;
+    margin-left: 5.5rem;
+    margin-right: 4.5rem;
+}
+`
+
+export const SearchBarItemClose = styled.div`
+    height: 28px;   
+    width: 28px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: hsl(180, 29%, 50%);
+    background-image: url(${remove});
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 5px;
+    &:hover {
         cursor: pointer;
         background-color: black;
-    }
-
-    &::after {
-        position: absolute;
-        content: '';
-        top: 0;
-        right: -24px;
-        height: 28px;
-        width: 28px;
-        border-bottom-right-radius: 5px;
-        border-top-right-radius: 5px;
-        background-color: hsl(180, 29%, 50%);
-        background-image: url(${remove});
-        background-repeat: no-repeat;
-        background-position: center;
-
-      
     }
 `
 
