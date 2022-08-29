@@ -2,10 +2,10 @@
 ###############################################
 ## Please do not remove line 5 - thanks! 🙂 ##
 ###############################################
-/fem/node_modules/
+node_modules/
 /Project
-/fem/build/*
-
+build/
+.vscode/
 
 # Avoid accidental XD or Figma upload if you convert the design file
 #######################################################
