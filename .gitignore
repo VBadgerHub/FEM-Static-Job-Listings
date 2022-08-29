@@ -4,6 +4,7 @@
 ###############################################
 /fem/node_modules/
 /Project
+/fem/build/*
 
 
 # Avoid accidental XD or Figma upload if you convert the design file
