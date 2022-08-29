@@ -60,7 +60,8 @@ function App() {
 
   const handleSingleFilter = (filter) => {
 
-    console.log('item clear') 
+    console.log(filter) 
+
     switch (filter.type) {
       case 'role':
         if (filterList.roles.includes(filter.value)) {
